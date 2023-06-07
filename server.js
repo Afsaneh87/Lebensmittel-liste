@@ -1,23 +1,16 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+#Nötigen Packages importieren
+
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+dotenv.config();
 
 const app = express();
-const port = 3000;
+const port = 5050;
 
 // Verbinde dich mit der MongoDB-Datenbank
-mongoose.connect('mongodb://localhost:27017/lebensmittel-db', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}).then(() => {
-  console.log('Verbindung zur Datenbank hergestellt');
-}).catch((err) => {
-  console.error('Fehler beim Verbinden mit der Datenbank:', err);
-  process.exit();
-});
-
 // Definiere ein Mongoose-Schema für Lebensmittel
-const foodSchema = new mongoose.Schema({
+/*const foodSchema = new mongoose.Schema({
   name: String,
   category: String
 });
@@ -63,4 +56,14 @@ app.post('/foods', (req, res) => {
 // Starte den Server
 app.listen(port, () => {
   console.log(`Server läuft auf Port ${port}`);
+});*/
+
+
+app.use(cors())
+app.get("/", (req, res) => {
+  res.send("Hallo von GET");
+});
+
+app.listen(port, () => {
+  console.log("Server läuft auf: ", port);
 });
